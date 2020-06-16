@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.itemsGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  justify-items: start;
+  padding-top: 10px;
+  margin-right: 20px;
+  max-width: 200px;
+}
+.liquido {
+  max-width: 200px;
+}
