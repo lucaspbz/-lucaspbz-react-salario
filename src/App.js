@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import css from './app.module.css';
-import { calculateSalaryFrom } from './salary';
+import { calculateSalaryFrom } from './salary.js';
 import { formatReal, formatPercent } from './helpers/formatters';
 import Bar from './components/bar/Bar';
+import InputReadOnly from './components/inputReadOnly/InputReadOnly';
 
 export default class App extends Component {
   constructor() {
@@ -19,6 +20,9 @@ export default class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.handleInputChange({ target: { value: 1000 } });
+  }
   handleInputChange = (e) => {
     const salarioBruto = e.target.value;
 
@@ -50,8 +54,8 @@ export default class App extends Component {
     } = this.state;
 
     const salarioLiquidoPercent = formatPercent(netSalary / salarioBruto);
-    const irpfPercent = formatPercent(discountIRPF / salarioBruto);
     const inssPercent = formatPercent(discountINSS / salarioBruto);
+    const irpfPercent = formatPercent(discountIRPF / salarioBruto);
 
     return (
       <div className="container">
@@ -60,50 +64,61 @@ export default class App extends Component {
             <h1>React Salário</h1>
           </div>
           <div>
-            <label className={'teal-text '}>Salário bruto</label>
-            <input
-              type="text"
-              className="validate text-bold"
-              style={{ borderBottom: '2px solid #26A69A' }}
-              onChange={this.handleInputChange}
-            />
-            <div className={css.itemsGroup}>
-              <div className={css.item}>
-                <label>Base INSS:</label>
-                <input readOnly value={formatReal(baseINSS)} />
-              </div>
-
-              <div className={css.item}>
-                <label>Desconto INSS:</label>
+            <div className="row">
+              <div className="col l12 s12">
+                <label className={'teal-text '}>Salário bruto</label>
                 <input
-                  className="orange-text"
-                  readOnly
-                  value={`${formatReal(discountINSS)} (${inssPercent}%)`}
-                />
-              </div>
-
-              <div className={css.item}>
-                <label>Base IRPF:</label>
-                <input readOnly value={formatReal(baseIRPF)} />
-              </div>
-
-              <div className={css.item}>
-                <label>Desconto IRPF</label>
-                <input
-                  className="red-text"
-                  readOnly
-                  value={`${formatReal(discountIRPF)} (${irpfPercent}%)`}
+                  type="text"
+                  className="validate"
+                  onChange={this.handleInputChange}
+                  value={salarioBruto}
                 />
               </div>
             </div>
-          </div>
-          <div className={css.liquido}>
-            <label>Salário líquido:</label>
-            <input
-              className=" teal-text"
-              readOnly
-              value={`${formatReal(netSalary)} (${salarioLiquidoPercent}%)`}
-            />
+
+            <div className="row">
+              <div className="col s6 m4 l3">
+                <InputReadOnly label={'Base INSS:'}>
+                  {formatReal(baseINSS)}
+                </InputReadOnly>
+              </div>
+
+              <div className="col s6 m4 l3">
+                <InputReadOnly
+                  label={'Desconto INSS:'}
+                  color={' #e67e22'}
+                  discount={inssPercent}
+                >
+                  {formatReal(discountINSS)}
+                </InputReadOnly>
+              </div>
+
+              <div className="col s6 m4 l3">
+                <InputReadOnly label={'Base IRPF:'}>
+                  {formatReal(baseIRPF)}
+                </InputReadOnly>
+              </div>
+
+              <div className="col s6 m4 l3">
+                <InputReadOnly
+                  label={'Desconto IRPF:'}
+                  color={'#c0392b'}
+                  discount={irpfPercent}
+                >
+                  {formatReal(discountIRPF)}
+                </InputReadOnly>
+              </div>
+
+              <div className="col s6 m4 l3">
+                <InputReadOnly
+                  label={'Salário líquido:'}
+                  color={'#16a085'}
+                  discount={salarioLiquidoPercent}
+                >
+                  {formatReal(netSalary)}
+                </InputReadOnly>
+              </div>
+            </div>
           </div>
         </div>
 

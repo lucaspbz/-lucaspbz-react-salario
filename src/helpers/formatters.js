@@ -7,10 +7,7 @@ function formatReal(value) {
 }
 
 function formatPercent(value) {
-  if (Number.isNaN(value)) {
-    return '0';
-  }
-  value *= 100;
+  Number.isNaN(value) ? (value = 0) : (value *= 100);
   return `${value.toFixed(2)}`;
 }
 
