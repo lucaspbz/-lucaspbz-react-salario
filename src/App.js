@@ -66,19 +66,21 @@ export default class App extends Component {
           <div>
             <div className="row">
               <div className="col l12 s12">
-                <label className="teal-text" htmlFor="salaryInput">
-                  Salário bruto
-                </label>
-                <input
-                  type="number"
-                  className="validate"
-                  onChange={this.handleInputChange}
-                  autoFocus
-                  step="100"
-                  min="0"
-                  value={salarioBruto}
-                  id="salaryInput"
-                />
+                <div className="input-field">
+                  <input
+                    type="number"
+                    className="validate"
+                    onChange={this.handleInputChange}
+                    autoFocus
+                    step="100"
+                    min="0"
+                    value={salarioBruto}
+                    id="salaryInput"
+                  />
+                  <label className="active" htmlFor="salaryInput">
+                    Salário bruto
+                  </label>
+                </div>
               </div>
             </div>
 
