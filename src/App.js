@@ -66,12 +66,18 @@ export default class App extends Component {
           <div>
             <div className="row">
               <div className="col l12 s12">
-                <label className={'teal-text '}>Salário bruto</label>
+                <label className="teal-text" htmlFor="salaryInput">
+                  Salário bruto
+                </label>
                 <input
-                  type="text"
+                  type="number"
                   className="validate"
                   onChange={this.handleInputChange}
+                  autoFocus
+                  step="100"
+                  min="0"
                   value={salarioBruto}
+                  id="salaryInput"
                 />
               </div>
             </div>
