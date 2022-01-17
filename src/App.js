@@ -61,7 +61,7 @@ export default class App extends Component {
       <div className="container">
         <div>
           <div className={css.header}>
-            <h1>React Salário</h1>
+            <h1>React Salárioss</h1>
           </div>
           <div>
             <div className="row">
